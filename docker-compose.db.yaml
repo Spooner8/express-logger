@@ -1,0 +1,22 @@
+name: dynamic-express-boilerplate
+
+services:
+  db:
+    container_name: db
+    image: postgres
+    ports:
+      - '5432:5432'
+    env_file:
+      - db.env
+    volumes:
+      - dynamic-express-boilerplate-db:/var/lib/postgresql/data
+    networks:
+      - dynamic-express-boilerplate
+    restart: always
+
+volumes:
+  dynamic-express-boilerplate-db:
+
+networks:
+  dynamic-express-boilerplate:
+    driver: bridge
