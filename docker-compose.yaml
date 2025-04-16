@@ -1,4 +1,4 @@
-name: dynamic-express-boilerplate
+name: express-logger
 
 services:
   logger:
@@ -12,9 +12,9 @@ services:
     env_file:
       - .env
     networks:
-      - dynamic-express-boilerplate
+      - express-logger
     restart: always
 
 networks:
-  dynamic-express-boilerplate:
+  express-logger:
     driver: bridge
