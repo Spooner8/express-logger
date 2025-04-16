@@ -1,88 +1,19 @@
 name: dynamic-express-boilerplate
 
 services:
-  loadbalancer:
-    image: nginx:latest
-    container_name: loadbalancer
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    ports:
-      - '80:80'
-    networks:
-      - dynamic-express-boilerplate
-    restart: always
-
-  prometheus:
-    image: prom/prometheus
-    container_name: prometheus
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
-    ports:
-      - '9090:9090'
-    restart: always
-    networks:
-      - dynamic-express-boilerplate
-
-  grafana:
-    image: grafana/grafana
-    container_name: grafana
-    ports:
-      - '3100:3000'
-    restart: always
-    volumes:
-      - dynamic-express-boilerplate-grafana:/var/lib/grafana
-    networks:
-      - dynamic-express-boilerplate
-  db:
-    container_name: db
-    image: postgres
-    ports:
-      - '5432:5432'
-    env_file:
-      - db.env
-    volumes:
-      - dynamic-express-boilerplate-db:/var/lib/postgresql/data
-    networks:
-      - dynamic-express-boilerplate
-    restart: always
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
-      interval: 5s
-      timeout: 2s
-      retries: 20
-  api-1:
+  logger:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: api-1
-    image: dynamic-express-boilerplate
+    container_name: logger
+    image: express-logger
+    ports:
+      - "3001:3001"
     env_file:
-      - api.env
-    depends_on:
-      db:
-        condition: service_healthy
+      - .env
     networks:
       - dynamic-express-boilerplate
     restart: always
-
-  api-2:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: api-2
-    image: dynamic-express-boilerplate
-    env_file:
-      - api.env
-    depends_on:
-      db:
-        condition: service_healthy
-    networks:
-      - dynamic-express-boilerplate
-    restart: always
-
-volumes:
-  dynamic-express-boilerplate-db:
-  dynamic-express-boilerplate-grafana:
 
 networks:
   dynamic-express-boilerplate:
