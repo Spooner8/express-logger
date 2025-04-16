@@ -1,6 +1,6 @@
 # 🚀 Express Logger
 
-Express Logger is a lightweight and efficient logging middleware for Express.js applications. It provides structured logging for HTTP requests and other application events, making it easier to debug and monitor your application.
+Express Logger is a lightweight and efficient logging service for Express.js applications. It provides structured logging for HTTP requests and other application events, making it easier to debug and monitor your application.
 
 ## ✨ Features
 

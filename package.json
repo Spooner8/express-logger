@@ -1,7 +1,7 @@
 {
   "name": "express-logger",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple express logger service that logs requests and responses in a structured format.",
   "homepage": "https://github.com/Spooner8/express-logger#readme",
   "bugs": {
     "url": "https://github.com/Spooner8/express-logger/issues"
